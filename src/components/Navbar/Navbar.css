@@ -1,0 +1,232 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 0;
+  background: rgba(5, 9, 20, 0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+  transition: all 0.4s var(--ease-out-quart);
+}
+
+.navbar--scrolled {
+  padding: 12px 0;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar__link {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.navbar__link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar__login {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.navbar__login:hover {
+  color: #ffffff;
+}
+
+.navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  background: var(--color-navy);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-out-quart);
+}
+
+.navbar__cta:hover {
+  background: var(--color-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+}
+
+.navbar__cta-arrow {
+  transition: transform 0.3s var(--ease-out-quart);
+}
+
+.navbar__cta:hover .navbar__cta-arrow {
+  transform: translateX(3px);
+}
+
+.navbar__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+}
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(5, 9, 20, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px;
+}
+
+.mobile-nav__link {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 12px 24px;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color 0.2s;
+}
+
+.mobile-nav__link:hover {
+  color: var(--color-cyan);
+}
+
+.mobile-nav__divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.24);
+  margin: 16px 0;
+}
+
+.mobile-nav__cta {
+  margin-top: 16px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--color-navy);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.mobile-nav__cta:hover {
+  background: var(--color-blue);
+}
+
+@media (max-width: 1180px) and (min-width: 901px) {
+  .navbar__inner {
+    gap: 16px;
+  }
+
+  .navbar__link {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .navbar__login {
+    padding: 8px 12px;
+  }
+
+  .navbar__cta {
+    padding: 9px 14px;
+  }
+}
+
+.navbar__cta--mobile {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .navbar__links,
+  .navbar__actions {
+    display: none;
+  }
+
+  .navbar__cta--mobile {
+    display: inline-flex;
+    padding: 9px 16px;
+    white-space: nowrap;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar__logo-img {
+    height: 34px;
+  }
+
+  .navbar__cta--mobile {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .navbar__cta--mobile .navbar__cta-arrow {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    width: 36px;
+    height: 36px;
+  }
+}

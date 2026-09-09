@@ -1,0 +1,105 @@
+.footer {
+  padding: 64px 0 40px;
+  background: #000000;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.footer__logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.footer__tagline {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__tagline::after {
+  content: ' • SIH26038 • MATLAB + Simulink';
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer__nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer__link {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer__link:hover {
+  color: #ffffff;
+}
+
+.footer__divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.18);
+  margin-bottom: 24px;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer__disclaimer {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 520px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .footer__top {
+    flex-direction: column;
+  }
+
+  .footer__nav {
+    gap: 16px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+  }
+
+  .footer__disclaimer {
+    text-align: left;
+  }
+}

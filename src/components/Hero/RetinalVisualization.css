@@ -1,0 +1,219 @@
+.retinal-viz {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Rings */
+.retinal-viz__rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.retinal-ring {
+  fill: none;
+  stroke-width: 0.5;
+}
+
+.retinal-ring--outer {
+  stroke: rgba(37, 99, 235, 0.15);
+  animation: ringRotateSlow 120s linear infinite;
+  transform-origin: center;
+}
+
+.retinal-ring--mid {
+  stroke: rgba(6, 182, 212, 0.12);
+  animation: ringRotateReverse 90s linear infinite;
+  transform-origin: center;
+  stroke-dasharray: 4 8;
+}
+
+.retinal-ring--inner {
+  stroke: rgba(20, 184, 166, 0.1);
+  animation: ringRotateSlow 60s linear infinite;
+  transform-origin: center;
+  stroke-dasharray: 2 6;
+}
+
+.retinal-tick {
+  stroke: rgba(37, 99, 235, 0.2);
+}
+
+/* Retina core */
+.retinal-viz__retina {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58%;
+  height: 58%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.retinal-viz__retina-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Analysis nodes */
+.analysis-dot {
+  animation: nodePulse 3s ease-in-out infinite;
+}
+
+.analysis-dot--1 { animation-delay: 0s; }
+.analysis-dot--2 { animation-delay: 0.5s; }
+.analysis-dot--3 { animation-delay: 1s; }
+.analysis-dot--4 { animation-delay: 1.5s; }
+.analysis-dot--5 { animation-delay: 2s; }
+.analysis-dot--6 { animation-delay: 2.5s; }
+
+/* Scan beam */
+.retinal-viz__scan-beam {
+  position: absolute;
+  top: 21%;
+  left: 21%;
+  width: 58%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.6), rgba(37, 99, 235, 0.4), transparent);
+  animation: scanBeam 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Floating labels */
+.retinal-viz__labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.retinal-viz__labels--static .retinal-label {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.retinal-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  animation: labelFloat 6s ease-in-out infinite;
+}
+
+.retinal-label__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.retinal-label__dot--blue { background: var(--color-blue); }
+.retinal-label__dot--cyan { background: var(--color-cyan); }
+.retinal-label__dot--teal { background: var(--color-teal); }
+
+.retinal-label__confidence {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.retinal-label--1 {
+  top: 8%;
+  right: -5%;
+  animation-delay: 0s;
+}
+
+.retinal-label--2 {
+  top: 30%;
+  left: -10%;
+  animation-delay: 1s;
+}
+
+.retinal-label--3 {
+  bottom: 25%;
+  right: -8%;
+  animation-delay: 2s;
+}
+
+.retinal-label--4 {
+  bottom: 8%;
+  left: -5%;
+  animation-delay: 3s;
+}
+
+.retinal-label--5 {
+  top: 55%;
+  right: -15%;
+  animation-delay: 4s;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Crosshair */
+.retinal-viz__crosshair {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.crosshair-line {
+  stroke: rgba(37, 99, 235, 0.06);
+  stroke-width: 0.5;
+  stroke-dasharray: 4 8;
+}
+
+/* Animations */
+@keyframes ringRotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ringRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes nodePulse {
+  0%, 100% { opacity: 0.4; r: 2; }
+  50% { opacity: 1; r: 3.5; }
+}
+
+@keyframes scanBeam {
+  0%, 100% { top: 21%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  50% { top: 60%; opacity: 0.8; }
+}
+
+@keyframes labelFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 900px) {
+  .retinal-viz {
+    max-width: 340px;
+  }
+
+  .retinal-label {
+    font-size: 0.5rem;
+    padding: 3px 6px;
+  }
+}

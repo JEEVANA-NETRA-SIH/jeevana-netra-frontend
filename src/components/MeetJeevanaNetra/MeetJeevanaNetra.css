@@ -1,0 +1,387 @@
+.meet {
+  padding: clamp(96px, 12vw, 160px) 0;
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.meet__layout {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: clamp(40px, 6vw, 84px);
+  align-items: center;
+}
+
+/* ---------- LEFT ---------- */
+
+.meet__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.meet__heading {
+  margin: 16px 0 20px;
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--color-text-primary);
+}
+
+.meet__heading-soft {
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.meet__heading-accent {
+  font-style: italic;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.meet__lede {
+  margin: 0 0 40px;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* Capabilities */
+
+.meet__capabilities {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.meet__cap {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 20px 0;
+}
+
+.meet__cap-connector {
+  position: absolute;
+  top: 52px;
+  left: 22px;
+  bottom: -18px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.35), rgba(20, 184, 166, 0.12));
+}
+
+.meet__cap:last-child .meet__cap-connector {
+  display: none;
+}
+
+.meet__cap-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  color: var(--color-blue);
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--color-white);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+  z-index: 1;
+  transition: border-color 0.35s, color 0.35s, box-shadow 0.35s, transform 0.35s var(--ease-out-quart);
+}
+
+.meet__cap-indicator {
+  align-self: center;
+}
+
+.meet__cap-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--color-teal), var(--color-blue));
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.meet__cap-body {
+  min-width: 0;
+}
+
+.meet__cap-title {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+  transition: color 0.3s;
+}
+
+.meet__cap-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 40ch;
+}
+
+.meet__cap:hover .meet__cap-num {
+  transform: translateX(4px);
+  border-color: rgba(37, 99, 235, 0.45);
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-blue), var(--color-teal));
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.25);
+}
+
+.meet__cap:hover .meet__cap-title {
+  color: var(--color-blue);
+}
+
+/* ---------- RIGHT ---------- */
+
+.meet__right {
+  display: flex;
+  justify-content: center;
+}
+
+.meet__console {
+  width: 100%;
+  max-width: 560px;
+  border: 1px solid var(--color-border);
+  border-radius: 26px;
+  background: linear-gradient(180deg, #ffffff, #fbfcfe);
+  box-shadow: 0 34px 70px rgba(15, 23, 42, 0.1);
+  padding: 20px;
+}
+
+.meet__console-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 18px;
+}
+
+.meet__console-title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-text-tertiary);
+}
+
+.meet__console-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-teal);
+}
+
+.meet__console-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  animation: meet-pulse 2.2s infinite;
+}
+
+@keyframes meet-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.45); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(20, 184, 166, 0); }
+}
+
+/* Retina viewport */
+
+.meet__retina {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #0c1030, #070a1e 70%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.meet__retina-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.meet__retina-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+}
+
+.meet__retina-orbit--1 {
+  top: 50%;
+  left: 50%;
+  width: 86%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.meet__retina-orbit--2 {
+  top: 50%;
+  left: 50%;
+  width: 54%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-style: dashed;
+  opacity: 0.5;
+}
+
+/* AI analysis overlay */
+
+.meet__ai-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.meet__ai-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(20, 184, 166, 0.8), transparent);
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.6);
+  animation: meet-scan 6s ease-in-out infinite;
+}
+
+@keyframes meet-scan {
+  0% { top: 8%; opacity: 0; }
+  12% { opacity: 0.8; }
+  88% { opacity: 0.8; }
+  100% { top: 92%; opacity: 0; }
+}
+
+.meet__ai-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+}
+
+.meet__ai-marker-core {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+
+/* Floating chips */
+
+.meet__chips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: 16px;
+}
+
+.meet__chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  background: var(--color-white);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+}
+
+.meet__chip-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.12);
+  color: var(--color-teal);
+  font-size: 0.7rem;
+  font-weight: 800;
+  margin-top: -1px;
+}
+
+.meet__chip-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 0.66rem;
+  color: var(--color-text-secondary);
+  line-height: 1.35;
+}
+
+.meet__chip-text strong {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meet__console-pulse,
+  .meet__ai-scan {
+    animation: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .meet__layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .meet__console {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .meet {
+    padding: 72px 0;
+  }
+
+  .meet__heading {
+    font-size: 2rem;
+  }
+
+  .meet__cap {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+  }
+
+  .meet__cap-indicator {
+    display: none;
+  }
+
+  .meet__chips {
+    grid-template-columns: 1fr;
+  }
+
+  .meet__console {
+    padding: 14px;
+    border-radius: 20px;
+  }
+}
