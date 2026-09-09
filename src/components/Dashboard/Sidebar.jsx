@@ -5,6 +5,7 @@ import {
   Sparkles,
   Users,
   BarChart3,
+  MapPin,
   Settings,
   LogOut,
   X,
@@ -17,6 +18,7 @@ const NAV_ITEMS = [
   { key: 'insights', label: 'AI Insights', icon: Sparkles },
   { key: 'patients', label: 'Patient Records', icon: Users },
   { key: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { key: 'nearest-clinic', label: 'Nearest Clinic', icon: MapPin },
 ]
 
 export default function Sidebar({ active, onNavigate, onLogout, open, onClose, theme }) {

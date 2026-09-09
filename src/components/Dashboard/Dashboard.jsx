@@ -8,6 +8,7 @@ import ScreeningHistory from './ScreeningHistory'
 import AIInsights from './AIInsights'
 import PatientRecords from './PatientRecords'
 import Analytics from './Analytics'
+import NearestClinic from './NearestClinic'
 import Settings from './Settings'
 import useTheme from './hooks/useTheme'
 import './Dashboard.css'
@@ -19,6 +20,7 @@ const PAGE_META = {
   insights: { title: 'AI Insights', subtitle: 'Cohort intelligence' },
   patients: { title: 'Patient Records', subtitle: 'Patient profiles' },
   analytics: { title: 'Analytics', subtitle: 'Platform performance' },
+  'nearest-clinic': { title: 'Nearest Clinic', subtitle: 'Find nearby partner clinics' },
   settings: { title: 'Settings', subtitle: 'Preferences and account' },
 }
 
@@ -54,6 +56,8 @@ export default function Dashboard({ onLogout }) {
         return <PatientRecords />
       case 'analytics':
         return <Analytics />
+      case 'nearest-clinic':
+        return <NearestClinic />
       case 'settings':
         return <Settings theme={theme} onToggleTheme={toggle} />
       default:
