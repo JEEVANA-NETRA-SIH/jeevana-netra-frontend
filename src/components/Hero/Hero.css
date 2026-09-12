@@ -200,7 +200,7 @@
   position: relative;
   z-index: 3;
   align-self: flex-start;
-  margin-top: -60px;
+  margin-top: -150px;
 }
 
 .hero__svg-image {
@@ -247,6 +247,10 @@
   .hero__meta {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .hero__visual {
+    margin-top: 0;
   }
 }
 

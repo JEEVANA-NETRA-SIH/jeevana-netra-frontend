@@ -1,0 +1,221 @@
+.tat {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 12px 12px;
+  border: 1px solid rgba(37, 99, 235, 0.16);
+  border-radius: 999px;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(240, 247, 254, 0.88) 100%
+  );
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  box-shadow:
+    0 10px 28px rgba(7, 26, 61, 0.16),
+    0 2px 8px rgba(7, 26, 61, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: var(--color-navy);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    transform 0.35s var(--ease-out-quart),
+    box-shadow 0.35s var(--ease-out-quart),
+    background 0.35s;
+  animation: tatGlow 3.8s var(--ease-out-quart) infinite;
+}
+
+.tat::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    100% 140% at 20% 0%,
+    rgba(6, 182, 212, 0.22) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+.tat__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 100%);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  flex-shrink: 0;
+}
+
+.tat:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 18px 42px rgba(7, 26, 61, 0.24),
+    0 4px 12px rgba(7, 26, 61, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(241, 248, 255, 0.94) 100%
+  );
+}
+
+.tat:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow:
+    0 6px 18px rgba(7, 26, 61, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.tat:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+@keyframes tatGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 28px rgba(7, 26, 61, 0.16),
+      0 2px 8px rgba(7, 26, 61, 0.08),
+      0 0 0 0 rgba(6, 182, 212, 0);
+  }
+  50% {
+    box-shadow:
+      0 10px 28px rgba(7, 26, 61, 0.16),
+      0 2px 8px rgba(7, 26, 61, 0.08),
+      0 0 22px 2px rgba(6, 182, 212, 0.28);
+  }
+}
+
+.tat__toast-region {
+  position: fixed;
+  right: 24px;
+  bottom: 88px;
+  z-index: 90;
+  pointer-events: none;
+}
+
+.tat__toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 12px 14px;
+  border: 1px solid rgba(103, 232, 249, 0.2);
+  border-radius: 14px;
+  background: rgba(5, 9, 20, 0.92);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 16px 40px rgba(7, 26, 61, 0.4);
+  color: #eaf3ff;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.4;
+  pointer-events: auto;
+  animation: tatToastIn 0.45s var(--ease-out-quart) both;
+}
+
+.tat__toast-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: var(--color-navy);
+  background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue) 100%);
+  flex-shrink: 0;
+}
+
+.tat__toast-text {
+  flex: 1;
+}
+
+.tat__toast-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-left: 2px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.tat__toast-close:hover {
+  background: rgba(148, 163, 184, 0.32);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.tat__toast-close:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+@keyframes tatToastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .tat {
+    padding: 10px 16px 10px 10px;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  .tat__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tat__toast-region {
+    right: 16px;
+    bottom: 76px;
+    left: 16px;
+  }
+
+  .tat__toast {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tat {
+    animation: none;
+  }
+
+  .tat:hover,
+  .tat:active {
+    transform: none;
+  }
+
+  .tat__toast {
+    animation: none;
+  }
+}

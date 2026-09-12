@@ -12,8 +12,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>Jeevana Netra — Explainable AI for Diabetic Retinopathy Screening</title>
+    <style>
+      /* Prevent a white flash before the React preloader mounts. */
+      html, body { margin: 0; background: #ffffff; }
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: linear-gradient(180deg, #ffffff 0%, #f7fafc 42%, #eef4fb 100%);
+      }
+      #boot-splash img {
+        width: min(200px, 40vw, 30vh);
+        height: auto;
+        object-fit: contain;
+      }
+    </style>
   </head>
   <body>
+    <div id="boot-splash"><img src="/navbarlogo.png" alt="Jeevana Netra" /></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

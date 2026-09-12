@@ -104,6 +104,13 @@ export default function ProblemSection() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="problem__transition-ring" aria-hidden="true" />
+          <img
+            className="problem__transition-bg"
+            src="/What if potential retinal risk could be identified earlier.png"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
           <motion.p
             className="problem__transition-text"
             initial={{ opacity: 0, y: 16 }}

@@ -5,12 +5,12 @@ import './Navbar.css'
 
 const navLinks = [
   { label: 'Home', href: '#hero' },
-  { label: 'Team', href: '#our-team' },
-  { label: 'Development Roadmap', href: '#roadmap' },
+  { label: 'Team', href: '#our-team', view: 'team' },
+  { label: 'About', href: '#about', view: 'about' },
   { label: 'How It Works', href: '#how-it-works' },
 ]
 
-export default function Navbar({ onLoginClick }) {
+export default function Navbar({ onLoginClick, onTeamClick, onAboutClick, currentView = 'home' }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -29,6 +29,40 @@ export default function Navbar({ onLoginClick }) {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
+  const navigateViewLink = (link, onOpen) => {
+    if (onOpen) onOpen()
+    if (link.view === 'team') onTeamClick()
+    else if (link.view === 'about') onAboutClick()
+  }
+
+  const isActive = (link) => {
+    if (link.view) return currentView === link.view
+    return currentView === 'home'
+  }
+
+  const renderNavLink = (link, className, onOpen) => {
+    const active = isActive(link)
+    const classes = `${className}${active ? ` ${className}--active` : ''}`
+    return (
+      <a
+        key={link.href}
+        href={link.href}
+        className={classes}
+        onClick={
+          link.view
+            ? (e) => {
+                e.preventDefault()
+                navigateViewLink(link, onOpen)
+              }
+            : undefined
+        }
+        aria-current={active ? 'page' : undefined}
+      >
+        {link.label}
+      </a>
+    )
+  }
+
   return (
     <>
       <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} role="navigation" aria-label="Main navigation">
@@ -38,11 +72,7 @@ export default function Navbar({ onLoginClick }) {
           </a>
 
           <div className="navbar__links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="navbar__link">
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => renderNavLink(link, 'navbar__link'))}
           </div>
 
           <div className="navbar__actions">
@@ -96,17 +126,14 @@ export default function Navbar({ onLoginClick }) {
               transition={{ duration: 0.3, delay: 0.05 }}
             >
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  className="mobile-nav__link"
-                  onClick={() => setMobileOpen(false)}
                   initial={{ y: 16, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
                 >
-                  {link.label}
-                </motion.a>
+                  {renderNavLink(link, 'mobile-nav__link', () => setMobileOpen(false))}
+                </motion.div>
               ))}
               <div className="mobile-nav__divider" />
               <button

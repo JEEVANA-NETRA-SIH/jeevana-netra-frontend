@@ -1,0 +1,215 @@
+.wa {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 1px solid rgba(20, 184, 166, 0.28);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0e9384 0%, #14b8a6 55%, #06b6d4 100%);
+  box-shadow:
+    0 10px 26px rgba(7, 26, 61, 0.22),
+    0 2px 8px rgba(7, 26, 61, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    transform 0.35s var(--ease-out-quart),
+    box-shadow 0.35s var(--ease-out-quart);
+  animation: waGlow 4.2s var(--ease-out-quart) infinite;
+}
+
+.wa__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s var(--ease-out-quart);
+}
+
+.wa__ring {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 184, 166, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  animation: waRing 4.2s var(--ease-out-quart) infinite;
+}
+
+.wa__sparkle {
+  position: absolute;
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(125, 211, 252, 0.95);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wa__sparkle--1 {
+  top: -5px;
+  right: -2px;
+  animation: waSparkle 5.5s ease-in-out 0.6s infinite;
+}
+
+.wa__sparkle--2 {
+  bottom: -6px;
+  left: -1px;
+  font-size: 9px;
+  animation: waSparkle 6.5s ease-in-out 2.8s infinite;
+}
+
+.wa:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow:
+    0 16px 38px rgba(7, 26, 61, 0.3),
+    0 4px 12px rgba(7, 26, 61, 0.12),
+    0 0 24px rgba(20, 184, 166, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.wa:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.wa:hover .wa__icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.wa:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+}
+
+.wa__tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  padding: 7px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 10px;
+  background: rgba(5, 9, 20, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(7, 26, 61, 0.4);
+  color: #eaf3ff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.28s var(--ease-out-quart),
+    transform 0.28s var(--ease-out-quart),
+    visibility 0.28s;
+}
+
+.wa__tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: rgba(5, 9, 20, 0.94);
+}
+
+.wa:hover .wa__tooltip,
+.wa:focus-visible .wa__tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@keyframes waGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 26px rgba(7, 26, 61, 0.22),
+      0 2px 8px rgba(7, 26, 61, 0.1),
+      0 0 0 0 rgba(20, 184, 166, 0);
+  }
+  50% {
+    box-shadow:
+      0 10px 26px rgba(7, 26, 61, 0.22),
+      0 2px 8px rgba(7, 26, 61, 0.1),
+      0 0 22px 3px rgba(20, 184, 166, 0.3);
+  }
+}
+
+@keyframes waRing {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes waSparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-1px, 2px) scale(1) rotate(20deg);
+  }
+  38% {
+    opacity: 0;
+    transform: translate(-4px, 6px) scale(0.7) rotate(45deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .wa {
+    width: 44px;
+    height: 44px;
+  }
+
+  .wa__sparkle--2 {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .wa__tooltip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa {
+    animation: none;
+  }
+
+  .wa__ring,
+  .wa__sparkle {
+    animation: none;
+    opacity: 0;
+  }
+
+  .wa:hover {
+    transform: scale(1.03);
+  }
+
+  .wa:active {
+    transform: scale(0.96);
+  }
+
+  .wa:hover .wa__icon {
+    transform: none;
+  }
+}
