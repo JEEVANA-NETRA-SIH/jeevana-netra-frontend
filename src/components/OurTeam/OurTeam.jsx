@@ -1,3 +1,4 @@
+import { useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from '../../hooks'
 import './OurTeam.css'
@@ -6,46 +7,105 @@ const members = [
   {
     num: '01',
     name: 'Preethi K',
-    role: 'Team Leader & Backend Development',
-    desc: 'Leading the Jeevana Netra team and contributing to the backend architecture and technical development of the project.',
+    role: 'Team Leader · AI-Assisted Full-Stack Developer',
+    desc: 'Overall team leadership and coordination, project planning, AI-assisted full-stack development, technical decision-making, module integration, and SIH execution strategy.',
     initials: 'PK',
+    tags: ['Leadership', 'Full-Stack', 'Integration'],
   },
   {
     num: '02',
     name: 'Naga Neeraj Pasupuleti',
-    role: 'Frontend, UI/UX & Ideation Member',
-    desc: 'Responsible for frontend development, user experience, website interaction, and communication and coordination with the team.',
+    role: 'Ideation Lead · AI-Assisted Full-Stack Developer',
+    desc: 'Core idea development and innovation, solution architecture, AI-assisted full-stack development, feature planning, frontend/backend integration, deployment, and technical implementation.',
     initials: 'NN',
+    tags: ['Ideation', 'Architecture', 'Development'],
   },
   {
     num: '03',
-    name: 'Ram Charan R V',
-    role: 'Dataset Research & Development Support',
-    desc: 'Responsible for collecting and organizing datasets while providing technical and development support to the project team.',
-    initials: 'RC',
+    name: 'Suryateja Reddy Yanamala',
+    role: 'Documentation · Presentation & Business Lead',
+    desc: 'Technical and SIH documentation, feasibility and scalability analysis, business and impact analysis, competitor research, PPT content, and presentation coordination.',
+    initials: 'SR',
+    tags: ['Documentation', 'Business', 'Presentation'],
   },
   {
     num: '04',
-    name: 'Ravali Yarramaddu',
-    role: 'Presentation & Research Elements',
-    desc: 'Responsible for PPT development, presentation structure, and collecting important project and research elements.',
-    initials: 'RY',
+    name: 'Ram Charan R V',
+    role: 'Dataset Lead · DR Technical Researcher',
+    desc: 'Dataset identification and collection, dataset organization and preprocessing, diabetic retinopathy research, technical DR study, and supporting AI/ML requirements with relevant data.',
+    initials: 'RC',
+    tags: ['Datasets', 'DR Research', 'AI/ML'],
   },
   {
     num: '05',
-    name: 'Pavan Pragna S',
-    role: 'AI Prompting & Visual Presentation',
-    desc: 'Responsible for AI image prompting, visual content development, and supporting presentation creation.',
-    initials: 'PP',
+    name: 'Ravali Yarramaddu',
+    role: 'Project Visual Lead · Presentation Lead',
+    desc: 'Jeevana Netra\'s visual identity, product visuals, architecture and workflow diagrams, posters, project graphics, PPT visual design, and presentation support.',
+    initials: 'RY',
+    tags: ['Visual Design', 'PPT', 'Branding'],
   },
   {
     num: '06',
-    name: 'Suryateja Reddy Yanamala',
-    role: 'Project Testing & Solution Specialist',
-    desc: 'Responsible for testing the project, identifying potential issues, evaluating the solution, and improving the overall user experience.',
-    initials: 'SR',
+    name: 'Pavan Pragna S',
+    role: 'AI Prompt & Visual Generation Lead · Medical Domain Lead',
+    desc: 'AI prompting strategy, AI-generated visuals, medical-domain research, diabetic retinopathy understanding, medical terminology validation, and bridging medical requirements with the technical team.',
+    initials: 'PP',
+    tags: ['AI Prompting', 'Medical Research', 'Visuals'],
   },
 ]
+
+function GlowCard({ member, index, isInView }) {
+  const cardRef = useRef(null)
+
+  const handleMouseMove = useCallback((e) => {
+    const card = cardRef.current
+    if (!card) return
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    card.style.setProperty('--glow-x', `${x}px`)
+    card.style.setProperty('--glow-y', `${y}px`)
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    const card = cardRef.current
+    if (!card) return
+    card.style.setProperty('--glow-x', '-100px')
+    card.style.setProperty('--glow-y', '-100px')
+  }, [])
+
+  return (
+    <motion.div
+      className="ot-card"
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 28 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.15 + index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="ot-card__glow" aria-hidden="true" />
+      <div className="ot-card__number" aria-hidden="true">{member.num}</div>
+
+      <div className="ot-card__avatar">
+        <div className="ot-card__avatar-ring" />
+        <div className="ot-card__avatar-ring ot-card__avatar-ring--inner" />
+        <span className="ot-card__initials">{member.initials}</span>
+      </div>
+
+      <div className="ot-card__body">
+        <h4 className="ot-card__name">{member.name}</h4>
+        <span className="ot-card__role">{member.role}</span>
+        <p className="ot-card__desc">{member.desc}</p>
+        <div className="ot-card__tags">
+          {member.tags.map((tag) => (
+            <span key={tag} className="ot-card__tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function OurTeam() {
   const [ref, isInView] = useInView({ threshold: 0.08 })
@@ -57,103 +117,75 @@ export default function OurTeam() {
   })
 
   return (
-    <section className="ourteam" ref={ref} id="our-team">
-      <div className="ourteam__inner container">
+    <section className="ot" ref={ref} id="our-team">
+      {/* Subtle background decoration */}
+      <div className="ot__bg" aria-hidden="true">
+        <div className="ot__bg-dot ot__bg-dot--1" />
+        <div className="ot__bg-dot ot__bg-dot--2" />
+        <div className="ot__bg-dot ot__bg-dot--3" />
+        <div className="ot__bg-line ot__bg-line--1" />
+        <div className="ot__bg-line ot__bg-line--2" />
+        <div className="ot__bg-line ot__bg-line--3" />
+      </div>
 
-        {/* Section Header */}
-        <div className="ourteam__header">
-          <motion.span className="section-label" {...reveal(0.1)}>
+      <div className="ot__inner container">
+
+        {/* ── Section Header ── */}
+        <div className="ot__header">
+          <motion.span className="section-label" {...reveal(0.08)}>
             OUR TEAM
           </motion.span>
-          <motion.h2 className="ourteam__heading" {...reveal(0.16)}>
+          <motion.h2 className="ot__heading" {...reveal(0.14)}>
             Meet the Team Behind{' '}
-            <span className="ourteam__heading-accent">Jeevana Netra.</span>
+            <span className="ot__heading-accent">Jeevana Netra.</span>
           </motion.h2>
-          <motion.p className="ourteam__subtitle" {...reveal(0.22)}>
+          <motion.p className="ot__subtitle" {...reveal(0.2)}>
             Technology, Innovation & Collaboration for Better Vision
           </motion.p>
-          <motion.p className="ourteam__lede" {...reveal(0.28)}>
+          <motion.p className="ot__lede" {...reveal(0.26)}>
             A multidisciplinary student team combining artificial intelligence, technology,
-            research, and innovation to build an accessible solution for early diabetic
-            retinopathy detection.
+            research, design, and innovation to build an accessible solution for early
+            diabetic retinopathy screening.
           </motion.p>
         </div>
 
-        {/* College Identity */}
-        <motion.div className="ourteam__college" {...reveal(0.1)}>
-          <div className="ourteam__college-badge">
-            <div className="ourteam__college-logo">
+        {/* ── Institution Card ── */}
+        <motion.div className="ot__inst" {...reveal(0.12)}>
+          <div className="ot__inst-glass" />
+          <div className="ot__inst-inner">
+            <div className="ot__inst-logo">
               <img src="/mitslogo.jpg" alt="Madanapalle Institute of Technology & Science logo" />
             </div>
+            <div className="ot__inst-info">
+              <h3 className="ot__inst-name">
+                Madanapalle Institute of Technology &amp; Science
+              </h3>
+              <span className="ot__inst-type">Deemed to be University</span>
+              <p className="ot__inst-tagline">Innovating technology for a healthier future.</p>
+            </div>
+            <span className="ot__inst-badge">SIH 2026 · Jeevana Netra</span>
           </div>
-          <h3 className="ourteam__college-name">MADANAPALLE INSTITUTE OF TECHNOLOGY & SCIENCE</h3>
-          <span className="ourteam__college-type">Deemed to be University</span>
-          <div className="ourteam__college-divider" aria-hidden="true" />
-          <p className="ourteam__college-tagline">Innovating technology for a healthier future.</p>
         </motion.div>
 
-        {/* Team Members */}
-        <div className="ourteam__grid">
+        {/* ── Team Grid ── */}
+        <div className="ot__grid">
           {members.map((m, i) => (
-            <motion.div
-              key={m.num}
-              className="ourteam__member"
-              {...reveal(0.2 + i * 0.06)}
-            >
-              <div className="ourteam__member-card">
-                <div className="ourteam__member-index">{m.num}</div>
-                <div className="ourteam__member-avatar">
-                  <div className="ourteam__member-initials">{m.initials}</div>
-                  <div className="ourteam__member-retina-ring" />
-                  <div className="ourteam__member-retina-ring ourteam__member-retina-ring--inner" />
-                </div>
-                <div className="ourteam__member-info">
-                  <h4 className="ourteam__member-name">{m.name}</h4>
-                  <span className="ourteam__member-role">{m.role}</span>
-                  <p className="ourteam__member-desc">{m.desc}</p>
-                </div>
-                <div className="ourteam__member-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                </div>
-              </div>
-            </motion.div>
+            <GlowCard key={m.num} member={m} index={i} isInView={isInView} />
           ))}
         </div>
 
-        {/* Bottom Statement */}
-        <motion.div className="ourteam__bottom" {...reveal(0.3)}>
-          <div className="ourteam__bottom-pattern" aria-hidden="true">
-            <svg viewBox="0 0 1200 200" className="ourteam__bottom-svg" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <radialGradient id="tNet" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="#2563EB" stopOpacity="0.06" />
-                  <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
-                </radialGradient>
-              </defs>
-              <circle cx="200" cy="100" r="80" fill="none" stroke="#14B8A6" strokeWidth="0.4" opacity="0.15" />
-              <circle cx="600" cy="100" r="100" fill="none" stroke="#2563EB" strokeWidth="0.5" opacity="0.1" />
-              <circle cx="1000" cy="100" r="70" fill="none" stroke="#06B6D4" strokeWidth="0.4" opacity="0.12" />
-              <circle cx="300" cy="60" r="30" fill="url(#tNet)" />
-              <circle cx="700" cy="140" r="40" fill="url(#tNet)" />
-              <circle cx="500" cy="80" r="2" fill="#2563EB" opacity="0.2" />
-              <circle cx="800" cy="120" r="1.5" fill="#14B8A6" opacity="0.2" />
-              <circle cx="400" cy="140" r="1.5" fill="#06B6D4" opacity="0.15" />
-              <line x1="200" y1="100" x2="500" y2="80" stroke="#2563EB" strokeWidth="0.3" opacity="0.08" />
-              <line x1="500" y1="80" x2="800" y2="120" stroke="#14B8A6" strokeWidth="0.3" opacity="0.08" />
-              <line x1="700" y1="140" x2="1000" y2="100" stroke="#06B6D4" strokeWidth="0.3" opacity="0.08" />
-            </svg>
-          </div>
-          <h3 className="ourteam__bottom-heading">
-            Different Skills. One Vision.{' '}
-            <span className="ourteam__bottom-heading-accent">Protecting Sight.</span>
+        {/* ── Bottom Statement ── */}
+        <motion.div className="ot__bottom" {...reveal(0.3)}>
+          <h3 className="ot__bottom-heading">
+            One Team. One Vision. One Purpose.
           </h3>
-          <p className="ourteam__bottom-text">
-            Together, we are building Jeevana Netra — combining artificial intelligence
-            and innovation to support early detection and help protect vision.
+          <p className="ot__bottom-text">
+            Building technology that can help make diabetic retinopathy screening
+            more accessible, explainable, and impactful.
           </p>
+          <div className="ot__bottom-line" aria-hidden="true">
+            <span className="ot__bottom-dot" />
+          </div>
         </motion.div>
       </div>
     </section>
